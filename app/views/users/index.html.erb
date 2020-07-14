@@ -1,0 +1,22 @@
+<h1>ユーザー一覧</h1>
+<% @users.each do |u| %>
+<p>
+    <%= u.id %>
+    <%= u.name %>
+    <%= u.phone %>
+    <%# 詳細はusers#showに紐づくので、 Prefixはuserになる %>
+    <%= link_to "[詳細]",user_path(u.id) %>
+    <%# 編集画面へリンクすると同時に、選んだユーザーidのデータを次の画面に渡す %>
+    <%= link_to "[編集]",edit_user_path(u.id) %>
+        <%# ユーザーのデーターのidを渡すとともに、削除のアクションを実行 %>
+    <%= link_to "[削除]", user_path(u.id), method: :delete, data: {confirm: "削除してよろしいですか？"}%>
+
+</p>
+<% end %>
+<p>
+   <%# new_user_pathとは　rake routes（routes.rbで定義したルーティングを、 %>
+   <%# ターミナルで確認することができるコマンド）を打った時に出てくる、 %>
+   <%# 飛ばしたいアクションのPrefixに「_path」をつけることで、パス指定が簡単できる %>
+   <%# ちなみにプロゲートでやったのは「link_to 第一引数に表示する文字、第二引数にURL指定」。もちろんURL指定でも動く。 %>
+    <%= link_to "新規登録", new_user_path %>
+</p>

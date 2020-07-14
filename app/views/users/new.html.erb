@@ -1,0 +1,27 @@
+<h1>新規登録</h1>
+<%# form_for、form_tagはRails 5.1からform_withに統合された。
+記述方法は３種全て異なる。form_withで記述しようとするも、
+なぜかバリデーションによるエラー文が表示されないため、
+form_forで記述する%>
+<%# <%= form_with model:@user do |f| %>
+<%= form_for (@user) do |f| %>
+<p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+    <%# もしバリデーションエラーが発生したら %>
+    <% if @user.errors.any? %>
+    <%# モデルで指定したエラーメッセージを表示する %>
+      <%= @user.errors.messages[:name][0]%>
+    <% end %>
+</p>
+
+<p>
+    <%= f.label :phone %><br>
+    <%= f.text_field :phone %>
+</p>
+
+<p>
+    <%= f.submit %>
+</p>
+
+<% end %>
